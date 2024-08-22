@@ -1,0 +1,5 @@
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "pages-stack-db"
+database_id = "870b13b1-23ac-4234-89f2-fd2c822e8c0f"
+migrations_dir = "./migrations"
