@@ -8,10 +8,22 @@
     "rules": {
       "recommended": true
     },
-    "ignore": [".wrangler", "pages", "node_modules", "migrations"]
+    "ignore": [
+      ".wrangler",
+      "pages",
+      "node_modules",
+      "migrations",
+      "routeTree.gen.ts"
+    ]
   },
   "formatter": {
     "indentStyle": "space",
-    "ignore": [".wrangler", "pages", "node_modules", "migrations"]
+    "ignore": [
+      ".wrangler",
+      "pages",
+      "node_modules",
+      "migrations",
+      "routeTree.gen.ts"
+    ]
   }
 }
