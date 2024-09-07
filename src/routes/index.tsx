@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useHelloRenderer } from "@/features/hello/hooks";
 
 export const Route = createFileRoute("/")({
@@ -11,9 +11,6 @@ function App() {
     <>
       {messageRenderer()}
       {inputRenderer()}
-      <div>
-        <Link to="/users">show users</Link>
-      </div>
     </>
   );
 }

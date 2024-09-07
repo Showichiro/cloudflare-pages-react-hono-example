@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "wrangler pages dev --compatibility-date=2023-02-05  -- bun vite",
+    "dev": "wrangler pages dev --compatibility-date=2023-02-05  -- vite",
     "build": "tsc -b && vite build",
     "lint": "biome lint --write .",
     "format": "biome format --write .",

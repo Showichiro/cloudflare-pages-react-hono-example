@@ -1,11 +1,11 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "8edbec78-f568-40fb-9327-6f8359173536",
+  "id": "87712628-f1c9-43da-9f17-342d9ecb6a09",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "resources": {
-      "name": "resources",
+    "articles": {
+      "name": "articles",
       "columns": {
         "id": {
           "name": "id",
@@ -21,8 +21,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "href": {
-          "name": "href",
+        "content": {
+          "name": "content",
           "type": "text",
           "primaryKey": false,
           "notNull": true,

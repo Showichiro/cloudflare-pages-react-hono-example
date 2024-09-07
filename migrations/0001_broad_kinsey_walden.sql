@@ -1,0 +1,1 @@
+ALTER TABLE `articles` ADD `sub` text NOT NULL;

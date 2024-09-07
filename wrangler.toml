@@ -1,5 +1,8 @@
 [[d1_databases]]
 binding = "DB" # i.e. available in your Worker on env.DB
 database_name = "pages-stack-db"
-database_id = "870b13b1-23ac-4234-89f2-fd2c822e8c0f"
+database_id = "705c2c5f-de8c-4738-8f21-57b0825fcf05"
 migrations_dir = "./migrations"
+
+[vars]
+REDIRECT_URI = "http://localhost:8788/api/auth/callback"

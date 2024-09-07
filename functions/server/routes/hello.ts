@@ -1,8 +1,8 @@
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
-import { factory } from "../util/appFactory";
+import { Hono, type Env } from "hono";
 
-export const helloApp = factory().get(
+export const helloApp = new Hono<Env>().get(
   "/",
   zValidator(
     "query",
