@@ -1,33 +1,27 @@
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
-import {
-  getItem,
-  LocalStorageUtilErrorReason,
-  removeItem,
-  setItem,
-} from "@/utils/localStorageUtil";
-import { LocalStorageKey } from "@/constants/localStorageKey";
-import { tokenInfoSchema } from "@/schemas/tokenInfo";
+import { LocalStorageUtilErrorReason } from "@/utils/localStorageUtil";
+import { getSavedToken, removeSavedToken, saveToken } from "@/features/token";
 import { z } from "zod";
 
-const rootSearchParamSchema = z
-  .object({
-    access_token: z.string(),
-    refresh_token: z.string(),
-  })
-  .or(z.object({}));
+const rootSearchSchema = z.object({
+  access_token: z.string().optional(),
+  refresh_token: z.string().optional(),
+});
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
 }>()({
   component: () => <Outlet />,
-  validateSearch: (search) => rootSearchParamSchema.parse(search),
+  validateSearch: (search) => rootSearchSchema.parse(search),
   beforeLoad: ({ search }) => {
-    if ("access_token" in search) {
-      setItem(LocalStorageKey.tokenInfo, search);
-      return;
+    if (search.access_token && search.refresh_token) {
+      saveToken({
+        access_token: search.access_token,
+        refresh_token: search.refresh_token,
+      });
     }
-    const itemResult = getItem(LocalStorageKey.tokenInfo, tokenInfoSchema);
+    const itemResult = getSavedToken();
     if (!itemResult.valid) {
       switch (itemResult.reason) {
         case LocalStorageUtilErrorReason.UNABLE_TO_USE_LOCAL_STORAGE:
@@ -37,7 +31,7 @@ export const Route = createRootRouteWithContext<{
           if (
             itemResult.reason === LocalStorageUtilErrorReason.CANNOT_PARSABLE
           ) {
-            removeItem(LocalStorageKey.tokenInfo);
+            removeSavedToken();
           }
           window.location.href = "/api/auth/login";
       }

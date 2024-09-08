@@ -1,4 +1,7 @@
 import { honoClient } from "@/utils/honoClient";
+import type { InferRequestType } from "hono";
 
-export const getHello = (name: string) =>
-  honoClient.api.hello.$get({ query: { name } }).then((v) => v.json());
+const { $get } = honoClient.api.hello;
+
+export const getHello = (args: InferRequestType<typeof $get>) =>
+  $get(args).then((v) => v.json());

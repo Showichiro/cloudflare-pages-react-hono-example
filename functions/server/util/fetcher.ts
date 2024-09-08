@@ -63,6 +63,7 @@ export const fetcher = async <
       return { valid: false, reason: ErrorReason.CANNOT_PARSABLE };
     }
   } catch (e) {
+    console.error(e);
     return {
       valid: false,
       reason: ErrorReason.FAILED_TO_FETCH,

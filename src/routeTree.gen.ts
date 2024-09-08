@@ -12,11 +12,29 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as ArticlesIndexImport } from './routes/articles.index'
+import { Route as ArticlesEditImport } from './routes/articles.edit'
+import { Route as ArticlesIdImport } from './routes/articles.$id'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ArticlesIndexRoute = ArticlesIndexImport.update({
+  path: '/articles/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ArticlesEditRoute = ArticlesEditImport.update({
+  path: '/articles/edit',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ArticlesIdRoute = ArticlesIdImport.update({
+  path: '/articles/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -31,12 +49,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/articles/$id': {
+      id: '/articles/$id'
+      path: '/articles/$id'
+      fullPath: '/articles/$id'
+      preLoaderRoute: typeof ArticlesIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/articles/edit': {
+      id: '/articles/edit'
+      path: '/articles/edit'
+      fullPath: '/articles/edit'
+      preLoaderRoute: typeof ArticlesEditImport
+      parentRoute: typeof rootRoute
+    }
+    '/articles/': {
+      id: '/articles/'
+      path: '/articles'
+      fullPath: '/articles'
+      preLoaderRoute: typeof ArticlesIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute })
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
+  ArticlesIdRoute,
+  ArticlesEditRoute,
+  ArticlesIndexRoute,
+})
 
 /* prettier-ignore-end */
 
@@ -46,11 +90,23 @@ export const routeTree = rootRoute.addChildren({ IndexRoute })
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/articles/$id",
+        "/articles/edit",
+        "/articles/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/articles/$id": {
+      "filePath": "articles.$id.tsx"
+    },
+    "/articles/edit": {
+      "filePath": "articles.edit.tsx"
+    },
+    "/articles/": {
+      "filePath": "articles.index.tsx"
     }
   }
 }

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { fetcher } from "../../util/fetcher";
+import { fetcher, HTTP_METHOD } from "../../util/fetcher";
 
 export const refreshTokenParamSchema = z.object({
   client_secret: z.string(),
@@ -30,6 +30,8 @@ export const fetchTokenRefresh = (
           ...params,
           grant_type: "refresh_token",
         } satisfies RefreshTokenParam),
+        method: HTTP_METHOD.POST,
+        headers: { "content-type": "application/x-www-form-urlencoded" },
       },
     },
     response: {

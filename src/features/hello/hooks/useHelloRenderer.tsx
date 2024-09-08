@@ -5,7 +5,7 @@ import { useName } from "./useName";
 const helloQueryOption = (name: string) =>
   queryOptions({
     queryKey: ["hello", name] as const,
-    queryFn: ({ queryKey: [, name] }) => getHello(name),
+    queryFn: ({ queryKey: [, name] }) => getHello({ query: { name } }),
     enabled: name !== "",
   });
 
